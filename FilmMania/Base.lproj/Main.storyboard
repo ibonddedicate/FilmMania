@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -310,10 +311,64 @@
                     <view key="view" contentMode="scaleToFill" id="mQl-j6-Chl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ldg-tN-Sxe">
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wKH-9B-5Pu">
+                                        <rect key="frame" x="10" y="0.0" width="355" height="724"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4t5-gY-BSM">
+                                            <size key="itemSize" width="170" height="254"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="aiA-ik-79J" customClass="MovieCell" customModule="FilmMania" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="170" height="254"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gBr-aq-JeF">
+                                                    <rect key="frame" x="0.0" y="0.0" width="170" height="254"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UVk-ea-w7d">
+                                                            <rect key="frame" x="0.0" y="0.0" width="170" height="254"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="UVk-ea-w7d" secondAttribute="trailing" id="68W-vw-AUf"/>
+                                                        <constraint firstItem="UVk-ea-w7d" firstAttribute="top" secondItem="gBr-aq-JeF" secondAttribute="top" id="DSO-w2-ZMx"/>
+                                                        <constraint firstItem="UVk-ea-w7d" firstAttribute="leading" secondItem="gBr-aq-JeF" secondAttribute="leading" id="VyE-gj-dbx"/>
+                                                        <constraint firstAttribute="bottom" secondItem="UVk-ea-w7d" secondAttribute="bottom" id="sYX-eX-BSa"/>
+                                                    </constraints>
+                                                </collectionViewCellContentView>
+                                                <connections>
+                                                    <outlet property="moviePoster" destination="UVk-ea-w7d" id="OEv-il-Qmc"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="wKH-9B-5Pu" firstAttribute="leading" secondItem="ldg-tN-Sxe" secondAttribute="leading" constant="10" id="09H-Wu-2fE"/>
+                                    <constraint firstAttribute="trailing" secondItem="wKH-9B-5Pu" secondAttribute="trailing" constant="10" id="FK1-NB-PzX"/>
+                                    <constraint firstAttribute="bottom" secondItem="wKH-9B-5Pu" secondAttribute="bottom" id="V0i-1F-6x8"/>
+                                    <constraint firstItem="wKH-9B-5Pu" firstAttribute="top" secondItem="ldg-tN-Sxe" secondAttribute="top" id="bWa-Gv-BKt"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ldg-tN-Sxe" firstAttribute="leading" secondItem="AfR-oW-y1Z" secondAttribute="leading" id="9YW-dG-27c"/>
+                            <constraint firstItem="ldg-tN-Sxe" firstAttribute="top" secondItem="AfR-oW-y1Z" secondAttribute="top" id="Afc-Le-V8H"/>
+                            <constraint firstAttribute="bottom" secondItem="ldg-tN-Sxe" secondAttribute="bottom" id="kri-0Z-wnD"/>
+                            <constraint firstItem="AfR-oW-y1Z" firstAttribute="trailing" secondItem="ldg-tN-Sxe" secondAttribute="trailing" id="ukY-qU-heT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="AfR-oW-y1Z"/>
                     </view>
-                    <navigationItem key="navigationItem" title="FILM MANIA" id="pXh-6k-1ep">
+                    <navigationItem key="navigationItem" title="Top Trending" id="pXh-6k-1ep">
                         <barButtonItem key="leftBarButtonItem" image="escape" catalog="system" id="XE3-vV-AGV">
                             <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -324,10 +379,13 @@
                             <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="moviesCV" destination="wKH-9B-5Pu" id="ZVu-kZ-wpa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="540-23-yqX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3348" y="137"/>
+            <point key="canvasLocation" x="3348" y="136.69950738916256"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gIi-RY-pyp">

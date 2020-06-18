@@ -24,6 +24,8 @@ class LoginController: UIViewController {
         Utilities.styleTextField(emailBox)
         Utilities.styleTextField(passwordBox)
         Utilities.styleFilledButton(loginButton)
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func loginPressed(_ sender: Any) {

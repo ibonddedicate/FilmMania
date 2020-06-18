@@ -25,6 +25,8 @@ class SignUpController: UIViewController {
 
         // Do any additional setup after loading the view.
         Utilities.styleFilledButton(signUpButton)
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
         
     }
     
