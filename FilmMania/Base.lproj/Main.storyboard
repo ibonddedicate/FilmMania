@@ -78,7 +78,7 @@
         <!--Login Controller-->
         <scene sceneID="rrd-5v-GZS">
             <objects>
-                <viewController id="JGS-qQ-jiN" customClass="LoginController" customModule="FilmMania" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" id="JGS-qQ-jiN" customClass="LoginController" customModule="FilmMania" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rgk-Gz-YBv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -131,14 +131,34 @@
                                     <constraint firstItem="4x2-hT-R1s" firstAttribute="height" secondItem="PsS-KK-GUe" secondAttribute="height" id="seV-yr-RRB"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDu-pX-aNv">
+                                <rect key="frame" x="102.66666666666669" y="519.33333333333337" width="170" height="33"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <state key="normal" title="Register new account">
+                                    <color key="titleColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="xQL-B1-TwS" kind="show" id="dvH-GO-9b8"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0r-xD-gVU">
+                                <rect key="frame" x="179.66666666666666" y="494" width="16" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="YDu-pX-aNv" firstAttribute="top" secondItem="h0r-xD-gVU" secondAttribute="bottom" constant="5" id="183-eO-eiW"/>
+                            <constraint firstItem="h0r-xD-gVU" firstAttribute="centerX" secondItem="Rgk-Gz-YBv" secondAttribute="centerX" id="3Vp-JL-zCG"/>
                             <constraint firstItem="yMC-yw-1Mu" firstAttribute="trailing" secondItem="SnI-uK-mr6" secondAttribute="trailing" constant="50" id="8Mh-Df-oqg"/>
+                            <constraint firstItem="h0r-xD-gVU" firstAttribute="top" secondItem="eM3-92-uPC" secondAttribute="bottom" constant="15" id="8xq-cy-wOr"/>
                             <constraint firstItem="yMC-yw-1Mu" firstAttribute="trailing" secondItem="eM3-92-uPC" secondAttribute="trailing" constant="50" id="A9I-Ht-Z7a"/>
                             <constraint firstItem="iQR-ZP-c7i" firstAttribute="top" secondItem="SnI-uK-mr6" secondAttribute="bottom" id="JiI-Kg-skM"/>
                             <constraint firstItem="iQR-ZP-c7i" firstAttribute="top" secondItem="yMC-yw-1Mu" secondAttribute="top" constant="150" id="LUf-1X-94t"/>
                             <constraint firstAttribute="trailing" secondItem="iQR-ZP-c7i" secondAttribute="trailing" constant="50" id="Lr2-GL-YaV"/>
+                            <constraint firstItem="YDu-pX-aNv" firstAttribute="centerX" secondItem="Rgk-Gz-YBv" secondAttribute="centerX" id="Miw-e2-1Eq"/>
                             <constraint firstItem="iQR-ZP-c7i" firstAttribute="top" secondItem="SnI-uK-mr6" secondAttribute="bottom" id="SiX-RQ-65v"/>
                             <constraint firstItem="eM3-92-uPC" firstAttribute="top" secondItem="iQR-ZP-c7i" secondAttribute="bottom" constant="40" id="ndo-d8-9dZ"/>
                             <constraint firstItem="SnI-uK-mr6" firstAttribute="leading" secondItem="yMC-yw-1Mu" secondAttribute="leading" constant="50" id="pzi-QN-aoo"/>
@@ -296,6 +316,9 @@
                     <navigationItem key="navigationItem" title="FILM MANIA" id="pXh-6k-1ep">
                         <barButtonItem key="leftBarButtonItem" image="escape" catalog="system" id="XE3-vV-AGV">
                             <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="logoffButton:" destination="JQZ-cY-QHn" id="B00-43-zO1"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="magnifyingglass" catalog="system" id="X97-sI-Z1s">
                             <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -330,6 +353,9 @@
             <point key="canvasLocation" x="173.91304347826087" y="136.60714285714286"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="dvH-GO-9b8"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="escape" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>

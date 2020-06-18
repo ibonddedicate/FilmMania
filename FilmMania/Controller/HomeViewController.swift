@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeViewController: UIViewController {
 
@@ -16,7 +17,18 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func logoffButton(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let VC = storyboard.instantiateViewController(identifier: "Login")
+            self.view.window?.rootViewController = VC
+        } catch let logoffError as NSError {
+            print(logoffError)
+        }
+        
+    }
+    
     /*
     // MARK: - Navigation
 
