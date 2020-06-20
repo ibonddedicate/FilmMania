@@ -29,7 +29,7 @@ class MovieDetailController: UIViewController {
     
     func setMovieData() {
         if localMoviePosterURL != nil {
-            let finalUrl = URL(string: "https://image.tmdb.org/t/p/w500\(localMoviePosterURL!)")
+            let finalUrl = URL(string: "https://image.tmdb.org/t/p/original\(localMoviePosterURL!)")
             moviePoster.load(url: finalUrl!)
         }
         if localMovieOverview != nil {
