@@ -106,6 +106,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             destination.localMoviePosterURL = movieDetail?.backdropPath
             destination.localMovieOverview = movieDetail?.overview
             destination.localMovieGlobalRating = movieDetail?.voteAverage
+            destination.localMovieReleasedDate = movieDetail?.releaseDate
         }
     }
 }

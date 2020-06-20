@@ -14,16 +14,24 @@ class MovieDetailController: UIViewController {
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieOverview: UILabel!
     @IBOutlet weak var movieGlobalRating: UILabel!
+    @IBOutlet weak var movieReleasedDate: UILabel!
+    @IBOutlet weak var releaseDateBox: UIView!
+    @IBOutlet weak var ratingBox: UIView!
     var localMovieTitle: String?
     var localMoviePosterURL: String?
     var localMovieOverview : String?
     var localMovieGlobalRating : Double?
+    var localMovieReleasedDate : String?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("\(localMovieTitle!) Details Downloaded")
+        releaseDateBox.layer.cornerRadius = 10
+        releaseDateBox.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
+        ratingBox.layer.cornerRadius = 15
+        ratingBox.layer.maskedCorners = [.layerMinXMinYCorner]
         movieTitle.text = localMovieTitle!
         setMovieData()
     }
@@ -44,6 +52,9 @@ class MovieDetailController: UIViewController {
             } else {
                 movieGlobalRating.text = "N/A"
             }
+        }
+        if localMovieReleasedDate != nil {
+            movieReleasedDate.text = localMovieReleasedDate!
         }
     }
 }
