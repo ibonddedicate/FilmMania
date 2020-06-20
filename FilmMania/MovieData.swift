@@ -23,3 +23,17 @@ struct Movie : Codable {
         case posterPath = "poster_path"
     }
 }
+
+struct MovieDetails : Codable {
+    let backdropPath : String?
+    let title : String?
+    let overview : String?
+    let voteAverage : Double
+    
+    enum CodingKeys: String, CodingKey {
+        case backdropPath = "backdrop_path"
+        case title
+        case overview
+        case voteAverage = "vote_average"
+    }
+}

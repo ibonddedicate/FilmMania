@@ -28,7 +28,8 @@ class LoginController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
-    @IBAction func loginPressed(_ sender: Any) {
+    @IBAction func loginPressed(_ sender: UIButton) {
+        sender.pulse()
         if validateLogin() {
             let properEmail = emailBox.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let properPassword = passwordBox.text!.trimmingCharacters(in: .whitespacesAndNewlines)

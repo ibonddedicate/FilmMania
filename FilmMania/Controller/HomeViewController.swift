@@ -8,18 +8,24 @@
 
 import UIKit
 import Firebase
+import SCLAlertView
+
 
 class HomeViewController: UIViewController {
     
     var dataManager = DataManager()
     var moviesArray = [Movie]()
+    var currentPage = 1
+    var movieDetail:MovieDetails?
+    
     @IBOutlet weak var moviesCV: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        dataManager.trendingMovieDelegate = self
-        dataManager.downloadTrendingJSON()
+        dataManager.allMoviesDelegate = self
+        dataManager.movieDetailsDelegate = self
+        dataManager.downloadAllMoviesJSON(page: currentPage)
         moviesCV.delegate = self
         moviesCV.dataSource = self
     }
@@ -30,6 +36,7 @@ class HomeViewController: UIViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let VC = storyboard.instantiateViewController(identifier: "Login")
             self.view.window?.rootViewController = VC
+            SCLAlertView().showNotice("Logged out", subTitle: "You have sucessfully logged out from your account")
         } catch let logoffError as NSError {
             print(logoffError)
         }
@@ -38,11 +45,18 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController: TrendingMovieDelegate {
+extension HomeViewController: AllMoviesDelegate, MovieDetailsDelegate {
     
-    func didGetMovieData(dataManager: DataManager, movie: MovieData) {
-        moviesArray = movie.results
-        print(moviesArray[0].id)
+    func didGetMovieDetail(dataManager: DataManager, movie: MovieDetails) {
+        movieDetail = movie
+    }
+
+    func didGetMovies(dataManager: DataManager, movie: MovieData) {
+        if currentPage > 1 {
+            self.moviesArray.append(contentsOf: movie.results)
+        } else {
+            moviesArray = movie.results
+        }
         DispatchQueue.main.async {
             self.moviesCV.reloadData()
         }
@@ -69,19 +83,29 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == moviesArray.count - 1 {
+            currentPage += 1
+            dataManager.downloadAllMoviesJSON(page: currentPage)
+        }
+    }
     
-}
-
-extension UIImageView {
-    func load(url:URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        dataManager.downloadMovieDetailJSON(id: moviesArray[indexPath.row].id) { (data) in
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "ToMovieDetail", sender: self)
             }
+        }
+        //let VC = storyboard?.instantiateViewController(identifier: "MovieDetail")
+        //self.navigationController?.pushViewController(VC!, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? MovieDetailController {
+            destination.localMovieTitle = movieDetail?.title
+            destination.localMoviePosterURL = movieDetail?.backdropPath
+            destination.localMovieOverview = movieDetail?.overview
+            destination.localMovieGlobalRating = movieDetail?.voteAverage
         }
     }
 }

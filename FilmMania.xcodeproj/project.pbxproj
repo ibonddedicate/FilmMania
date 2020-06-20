@@ -23,6 +23,7 @@
 		75530955249B664100E3F452 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75530954249B664100E3F452 /* Utilities.swift */; };
 		75BF7E65249B6B9A0075FC5C /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF7E64249B6B9A0075FC5C /* SignUpController.swift */; };
 		75BF7E67249B7A260075FC5C /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF7E66249B7A260075FC5C /* LoginController.swift */; };
+		75EDB034249DE32900B46203 /* MovieDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EDB033249DE32900B46203 /* MovieDetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		75530954249B664100E3F452 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		75BF7E64249B6B9A0075FC5C /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		75BF7E66249B7A260075FC5C /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		75EDB033249DE32900B46203 /* MovieDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailController.swift; sourceTree = "<group>"; };
 		9BB3BCE6F89EA19E47B3626D /* Pods-FilmMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmMania.release.xcconfig"; path = "Target Support Files/Pods-FilmMania/Pods-FilmMania.release.xcconfig"; sourceTree = "<group>"; };
 		C7CD4E0DAE6D4A9FCEB7012C /* Pods-FilmMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmMania.debug.xcconfig"; path = "Target Support Files/Pods-FilmMania/Pods-FilmMania.debug.xcconfig"; sourceTree = "<group>"; };
 		F9837066F43361FBF00FABBC /* Pods_FilmMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FilmMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +79,7 @@
 				75BF7E64249B6B9A0075FC5C /* SignUpController.swift */,
 				75BF7E66249B7A260075FC5C /* LoginController.swift */,
 				7523F60E249BBFBD0085C356 /* HomeViewController.swift */,
+				75EDB033249DE32900B46203 /* MovieDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				75530941249B544300E3F452 /* SceneDelegate.swift in Sources */,
 				75BF7E65249B6B9A0075FC5C /* SignUpController.swift in Sources */,
 				7523F613249BF08F0085C356 /* MovieData.swift in Sources */,
+				75EDB034249DE32900B46203 /* MovieDetailController.swift in Sources */,
 				75BF7E67249B7A260075FC5C /* LoginController.swift in Sources */,
 				7523F615249BF27F0085C356 /* DataManager.swift in Sources */,
 			);

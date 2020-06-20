@@ -30,8 +30,8 @@ class SignUpController: UIViewController {
         
     }
     
-    @IBAction func signUpPressed(_ sender: Any) {
-        
+    @IBAction func signUpPressed(_ sender: UIButton) {
+        sender.pulse()
         let properFirstname = firstNameBox.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let properLastname = lastNameBox.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let properEmail = emailBox.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -63,7 +63,7 @@ class SignUpController: UIViewController {
                 }
             }
         } else {
-            print ("failed")
+            print ("failed to signup")
         }
         
     }
