@@ -38,7 +38,6 @@ class DataManager {
                     self.movieDetailsDelegate?.didFail(error: error!)
                     return
                 }
-                print("Movie Details Downloaded")
                 do {
                     let decoder = JSONDecoder()
                     let decodedMovie = try decoder.decode(MovieDetails.self, from: data!)

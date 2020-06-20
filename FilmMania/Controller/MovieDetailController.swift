@@ -23,6 +23,7 @@ class MovieDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        print("\(localMovieTitle!) Details Downloaded")
         movieTitle.text = localMovieTitle!
         setMovieData()
     }
@@ -38,7 +39,11 @@ class MovieDetailController: UIViewController {
             movieOverview.text = "No Description Available."
         }
         if localMovieGlobalRating != nil {
-            movieGlobalRating.text = String(localMovieGlobalRating!)
+            if localMovieGlobalRating != 0.0 {
+                movieGlobalRating.text = String(localMovieGlobalRating!)
+            } else {
+                movieGlobalRating.text = "N/A"
+            }
         }
     }
 }
