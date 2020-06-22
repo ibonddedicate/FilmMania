@@ -17,11 +17,13 @@ class MovieDetailController: UIViewController {
     @IBOutlet weak var movieReleasedDate: UILabel!
     @IBOutlet weak var releaseDateBox: UIView!
     @IBOutlet weak var ratingBox: UIView!
+    @IBOutlet weak var ratingLine: UIView!
     var localMovieTitle: String?
     var localMoviePosterURL: String?
     var localMovieOverview : String?
     var localMovieGlobalRating : Double?
     var localMovieReleasedDate : String?
+    var fmColor = FMColor()
     
     
     override func viewDidLoad() {
@@ -34,6 +36,21 @@ class MovieDetailController: UIViewController {
         ratingBox.layer.maskedCorners = [.layerMinXMinYCorner]
         movieTitle.text = localMovieTitle!
         setMovieData()
+        setRatingColor()
+    }
+    
+    func setRatingColor() {
+        if localMovieGlobalRating! >= 5.0 {
+            ratingBox.layer.backgroundColor = fmColor.orangeFM.cgColor
+            ratingLine.layer.backgroundColor = fmColor.orangeFM.cgColor
+            if localMovieGlobalRating! >= 7.5 {
+                ratingBox.layer.backgroundColor = fmColor.greenFM.cgColor
+                ratingLine.layer.backgroundColor = fmColor.greenFM.cgColor
+            }
+        } else {
+            ratingBox.layer.backgroundColor = fmColor.redFM.cgColor
+            ratingLine.layer.backgroundColor = fmColor.redFM.cgColor
+        }
     }
     
     func setMovieData() {

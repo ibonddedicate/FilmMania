@@ -16,7 +16,7 @@ class Utilities {
         
         bottomLine.frame = CGRect(x: 0, y: textfield.frame.height - 2, width: textfield.frame.width, height: 2)
         
-        bottomLine.backgroundColor = UIColor.init(red: 255/255, green: 149/255, blue: 0/255, alpha: 1).cgColor
+        bottomLine.backgroundColor = FMColor().orangeFM.cgColor
         
         // Remove border on text field
         textfield.borderStyle = .none
@@ -27,7 +27,7 @@ class Utilities {
     }
     
     static func styleFilledButton(_ button:UIButton) {
-        button.backgroundColor = UIColor.init(red: 255/255, green: 149/255, blue: 0/255, alpha: 1)
+        button.backgroundColor = FMColor().orangeFM
         button.layer.cornerRadius = 25.0
         button.tintColor = UIColor.white
     }
@@ -85,4 +85,10 @@ extension UIImageView {
             }
         }
     }
+}
+
+struct FMColor {
+    var orangeFM = UIColor.init(red: 255/255, green: 149/255, blue: 0/255, alpha: 1)
+    var redFM  = UIColor.init(red: 255/255, green: 59/255, blue: 48/255, alpha: 1)
+    var greenFM = UIColor.init(red: 52/255, green: 165/255, blue: 89/255, alpha: 1)
 }

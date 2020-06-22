@@ -20,6 +20,13 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var moviesCV: UICollectionView!
     
+    let listRefresh: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -28,6 +35,13 @@ class HomeViewController: UIViewController {
         dataManager.downloadAllMoviesJSON(page: currentPage)
         moviesCV.delegate = self
         moviesCV.dataSource = self
+        moviesCV.refreshControl = listRefresh
+    }
+        
+    @objc func refresh(sender: UIRefreshControl){
+        dataManager.downloadAllMoviesJSON(page: 1)
+        sender.endRefreshing()
+        print("Refreshed : Reset back to Page 1")
     }
     
     @IBAction func logoffButton(_ sender: Any) {
@@ -42,7 +56,6 @@ class HomeViewController: UIViewController {
         }
         
     }
-
 }
 
 extension HomeViewController: AllMoviesDelegate, MovieDetailsDelegate {
@@ -53,12 +66,18 @@ extension HomeViewController: AllMoviesDelegate, MovieDetailsDelegate {
 
     func didGetMovies(dataManager: DataManager, movie: MovieData) {
         if currentPage > 1 {
+            let lastInArray = moviesArray.count
             self.moviesArray.append(contentsOf: movie.results)
+            let newLastInArray = moviesArray.count
+            let indexPaths = Array(lastInArray..<newLastInArray).map{IndexPath(item: $0, section: 0)}
+            DispatchQueue.main.async {
+                    self.moviesCV.insertItems(at: indexPaths)
+            }
         } else {
             moviesArray = movie.results
-        }
-        DispatchQueue.main.async {
-            self.moviesCV.reloadData()
+            DispatchQueue.main.async {
+                self.moviesCV.reloadData()
+            }
         }
     }
     
@@ -71,7 +90,7 @@ extension HomeViewController: AllMoviesDelegate, MovieDetailsDelegate {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        moviesArray.count
+        return moviesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -91,13 +110,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        dataManager.downloadMovieDetailJSON(id: moviesArray[indexPath.row].id) { (data) in
+        dataManager.downloadMovieDetailJSON(id: moviesArray[indexPath.row].id) {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "ToMovieDetail", sender: self)
             }
         }
-        //let VC = storyboard?.instantiateViewController(identifier: "MovieDetail")
-        //self.navigationController?.pushViewController(VC!, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
