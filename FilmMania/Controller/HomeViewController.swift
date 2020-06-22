@@ -103,6 +103,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        //
+        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+        cell.layer.transform = rotationTransform
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.50) {
+            cell.layer.transform = CATransform3DIdentity
+            cell.alpha = 1.0
+        }
         if indexPath.row == moviesArray.count - 1 {
             currentPage += 1
             dataManager.downloadAllMoviesJSON(page: currentPage)

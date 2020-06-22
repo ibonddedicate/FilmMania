@@ -16,6 +16,7 @@ class SearchViewController: UIViewController, SearchedMovieDelegate  {
     var movieDetail:MovieDetails?
     @IBOutlet weak var noResultPic: UIImageView!
     @IBOutlet weak var searchedMovieCV: UICollectionView!
+    @IBOutlet weak var navBar: UINavigationItem!
     
     var movieSearched:String?
     
@@ -42,15 +43,20 @@ class SearchViewController: UIViewController, SearchedMovieDelegate  {
         txt.textColor = UIColor.black
         searchBox.addButton("Search", backgroundColor: UIColor.systemOrange) {
             print("Button Pressed : \(txt.text!)")
+            if txt.text! != "" {
+                self.navBar.title = "\(txt.text!)"
+            }
             self.dataManager.downloadSearchedMovieJSON(named: txt.text!) {
                 DispatchQueue.main.async {
                     self.searchedMovieCV.reloadData()
+                    self.searchedMovieCV.scrollToItem(at: NSIndexPath(item: 0, section: 0) as IndexPath,
+                                                      at: .top,animated: true)
                 }
             }
             
         }
         movieSearched = txt.text
-        searchBox.showInfo("Search", subTitle: "Enter full or partial movie name that you would like to find")
+        searchBox.showInfo("Search for movies", subTitle: "Enter full or partial movie name that you would like to find")
     }
     
     func didGetSearchedMovie(dataManager: DataManager, movie: MovieData) {
@@ -87,6 +93,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         cell.movieName.text = searchedMovieArray[indexPath.row].title!
         cell.layer.cornerRadius = 10
+        
         return cell
     }
     
@@ -95,6 +102,16 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "ToMovieDetail", sender: self)
             }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+        cell.layer.transform = rotationTransform
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.50) {
+            cell.layer.transform = CATransform3DIdentity
+            cell.alpha = 1.0
         }
     }
     
