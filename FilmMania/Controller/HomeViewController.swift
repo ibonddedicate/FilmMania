@@ -17,8 +17,13 @@ class HomeViewController: UIViewController {
     var moviesArray = [Movie]()
     var currentPage = 1
     var movieDetail:MovieDetails?
+    var genresArray = [Genres]()
+    var selectedGenres = ""
     
+    @IBOutlet weak var genreBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var moviesCV: UICollectionView!
+    @IBOutlet weak var genreCV: UICollectionView!
+    @IBOutlet weak var titleBar: UINavigationItem!
     
     let listRefresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -30,18 +35,41 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        makeGenreList()
         dataManager.allMoviesDelegate = self
         dataManager.movieDetailsDelegate = self
-        dataManager.downloadAllMoviesJSON(page: currentPage)
+        dataManager.downloadAllMoviesJSON(page: currentPage, genres: selectedGenres)
         moviesCV.delegate = self
         moviesCV.dataSource = self
         moviesCV.refreshControl = listRefresh
+        genreCV.delegate = self
+        genreCV.dataSource = self
     }
         
     @objc func refresh(sender: UIRefreshControl){
-        dataManager.downloadAllMoviesJSON(page: 1)
+        dataManager.downloadAllMoviesJSON(page: 1, genres: selectedGenres)
         sender.endRefreshing()
         print("Refreshed : Reset back to Page 1")
+    }
+    
+    func makeGenreList() {
+        let all = Genres(id: "", name: "All", bgColor: UIColor.systemGray)
+        genresArray.append(all)
+        let action = Genres(id: "28", name: "Action", bgColor: UIColor.systemRed)
+        genresArray.append(action)
+        let adventure = Genres(id: "12", name: "Adventure", bgColor: UIColor.systemBlue)
+        genresArray.append(adventure)
+        let comedy = Genres(id: "35" , name: "Comedy", bgColor: UIColor.systemGreen)
+        genresArray.append(comedy)
+        let drama = Genres(id: "18", name: "Drama", bgColor: UIColor.purple)
+        genresArray.append(drama)
+        let horror = Genres(id: "27", name: "Horror", bgColor: UIColor.darkGray)
+        genresArray.append(horror)
+        let romance = Genres(id: "10749", name: "Romance", bgColor: UIColor.systemPink)
+        genresArray.append(romance)
+        let thriller = Genres(id: "53", name: "Thriller", bgColor: UIColor.orange)
+        genresArray.append(thriller)
+        
     }
     
     @IBAction func logoffButton(_ sender: Any) {
@@ -90,38 +118,64 @@ extension HomeViewController: AllMoviesDelegate, MovieDetailsDelegate {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return moviesArray.count
+        if collectionView == self.moviesCV {
+            return moviesArray.count
+        } else {
+            return genresArray.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        let imageUrl = moviesArray[indexPath.row].posterPath!
-        let url = URL(string: "https://image.tmdb.org/t/p/w500\(imageUrl)")!
-        cell.moviePoster.load(url: url)
-        cell.layer.cornerRadius = 10
-        return cell
+        if collectionView == self.moviesCV {
+            let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
+            let imageUrl = moviesArray[indexPath.row].posterPath!
+            let url = URL(string: "https://image.tmdb.org/t/p/w500\(imageUrl)")!
+            cellA.moviePoster.load(url: url)
+            cellA.layer.cornerRadius = 10
+            return cellA
+        } else {
+            let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: "GenreCell", for: indexPath) as! GenreCell
+            cellB.genreName.text = genresArray[indexPath.row].name
+            cellB.backgroundColor = genresArray[indexPath.row].bgColor
+            cellB.layer.cornerRadius = 15
+            return cellB
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //
-        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-        cell.layer.transform = rotationTransform
-        cell.alpha = 0
-        UIView.animate(withDuration: 0.50) {
-            cell.layer.transform = CATransform3DIdentity
-            cell.alpha = 1.0
-        }
-        if indexPath.row == moviesArray.count - 1 {
-            currentPage += 1
-            dataManager.downloadAllMoviesJSON(page: currentPage)
+        if collectionView == self.moviesCV {
+            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+            cell.layer.transform = rotationTransform
+            cell.alpha = 0
+            UIView.animate(withDuration: 0.50) {
+                cell.layer.transform = CATransform3DIdentity
+                cell.alpha = 1.0
+            }
+            if indexPath.row == moviesArray.count - 1 {
+                currentPage += 1
+                dataManager.downloadAllMoviesJSON(page: currentPage, genres: selectedGenres)
+            }
+        } else {
+            cell.alpha = 0
+            UIView.animate(withDuration: 0.50) {
+                cell.alpha = 1.0
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        dataManager.downloadMovieDetailJSON(id: moviesArray[indexPath.row].id) {
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "ToMovieDetail", sender: self)
+        if collectionView == self.moviesCV {
+            dataManager.downloadMovieDetailJSON(id: moviesArray[indexPath.row].id) {
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "ToMovieDetail", sender: self)
+                }
             }
+        } else {
+            selectedGenres = genresArray[indexPath.row].id
+            currentPage = 1
+            dataManager.downloadAllMoviesJSON(page: currentPage, genres: selectedGenres)
+            self.moviesCV.scrollToItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, at: .top,animated: true)
+            titleBar.title = "\(genresArray[indexPath.row].name) Movies"
         }
     }
     
@@ -133,5 +187,25 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             destination.localMovieGlobalRating = movieDetail?.voteAverage
             destination.localMovieReleasedDate = movieDetail?.releaseDate
         }
+    }
+}
+
+extension HomeViewController : UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.y > 50 {
+        view.layoutIfNeeded()
+        genreBarHeightConstraint.constant = 0
+        UIView.animate(withDuration: 0.75, delay: 0, options: [.allowUserInteraction], animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+
+    }else {
+        // expand the header
+        view.layoutIfNeeded()
+        genreBarHeightConstraint.constant = 35
+        UIView.animate(withDuration: 0.35, delay: 0, options: [.allowUserInteraction], animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+     }
     }
 }

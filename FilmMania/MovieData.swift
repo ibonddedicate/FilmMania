@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct MovieData : Codable {
     let results : [Movie]
@@ -40,4 +41,16 @@ struct MovieDetails : Codable {
         case voteAverage = "vote_average"
         case releaseDate = "release_date"
     }
+}
+class Genres {
+    var id : String
+    var name : String
+    var bgColor : UIColor
+    
+    init(id:String, name: String, bgColor: UIColor) {
+        self.id = id
+        self.name = name
+        self.bgColor = bgColor
+    }
+    
 }

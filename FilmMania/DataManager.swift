@@ -31,7 +31,7 @@ class DataManager {
     let movieDetailsURL = "https://api.themoviedb.org/3/movie/"
     let movieDetailsTrailingURL = "?api_key="
     let allMoviesURL = "https://api.themoviedb.org/3/discover/movie?api_key="
-    let allMoviesTrailingURL = "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page="
+    let allMoviesTrailingURL = "&language=en-US&sort_by=popularity.desc&include_adult=false&page="
     let searchedMovieURL = "https://api.themoviedb.org/3/search/movie?api_key="
     
     func downloadMovieDetailJSON(id : Int, completionHandler completion: @escaping (()->Void)){
@@ -57,8 +57,8 @@ class DataManager {
         }
     }
     
-    func downloadAllMoviesJSON(page : Int){
-        let finalUrl = "\(allMoviesURL)\(apiKey)\(allMoviesTrailingURL)\(page)"
+    func downloadAllMoviesJSON(page : Int, genres : String){
+        let finalUrl = "\(allMoviesURL)\(apiKey)\(allMoviesTrailingURL)\(page)&with_genres=\(genres)"
         if let url = URL(string: finalUrl){
             let request = URLRequest(url: url)
             let session = URLSession(configuration: .default)
@@ -67,7 +67,7 @@ class DataManager {
                     self.allMoviesDelegate?.didFail(error: error!)
                     return
                 }
-                print("All Movies on page \(page) Downloaded")
+                print("Genre id \(genres) Movies on page \(page) Downloaded")
                 do {
                     let decoder = JSONDecoder()
                     let decodedMovie = try decoder.decode(MovieData.self, from: data!)
