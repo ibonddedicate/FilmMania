@@ -53,36 +53,46 @@ class HomeViewController: UIViewController {
     }
     
     func makeGenreList() {
-        let all = Genres(id: "", name: "All", bgColor: UIColor.systemGray)
+        let all = Genres(id: "", name: "All", bgColor: UIColor.systemOrange)
         genresArray.append(all)
-        let action = Genres(id: "28", name: "Action", bgColor: UIColor.systemRed)
+        let action = Genres(id: "28", name: "Action", bgColor: UIColor.systemGray)
         genresArray.append(action)
-        let adventure = Genres(id: "12", name: "Adventure", bgColor: UIColor.systemBlue)
+        let adventure = Genres(id: "12", name: "Adventure", bgColor: UIColor.systemGray)
         genresArray.append(adventure)
-        let comedy = Genres(id: "35" , name: "Comedy", bgColor: UIColor.systemGreen)
+        let comedy = Genres(id: "35" , name: "Comedy", bgColor: UIColor.systemGray)
         genresArray.append(comedy)
-        let drama = Genres(id: "18", name: "Drama", bgColor: UIColor.purple)
+        let drama = Genres(id: "18", name: "Drama", bgColor: UIColor.systemGray)
         genresArray.append(drama)
-        let horror = Genres(id: "27", name: "Horror", bgColor: UIColor.darkGray)
+        let horror = Genres(id: "27", name: "Horror", bgColor: UIColor.systemGray)
         genresArray.append(horror)
-        let romance = Genres(id: "10749", name: "Romance", bgColor: UIColor.systemPink)
+        let romance = Genres(id: "10749", name: "Romance", bgColor: UIColor.systemGray)
         genresArray.append(romance)
-        let thriller = Genres(id: "53", name: "Thriller", bgColor: UIColor.orange)
+        let thriller = Genres(id: "53", name: "Thriller", bgColor: UIColor.systemGray)
         genresArray.append(thriller)
         
     }
     
     @IBAction func logoffButton(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let VC = storyboard.instantiateViewController(identifier: "Login")
-            self.view.window?.rootViewController = VC
-            SCLAlertView().showNotice("Logged out", subTitle: "You have sucessfully logged out from your account")
-        } catch let logoffError as NSError {
-            print(logoffError)
+        let logoutAppearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+        let logoutBox = SCLAlertView(appearance: logoutAppearance)
+        logoutBox.addButton("Yes") {
+            do {
+                try Auth.auth().signOut()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let VC = storyboard.instantiateViewController(identifier: "Login")
+                self.view.window?.rootViewController = VC
+                SCLAlertView().showNotice("Logged out", subTitle: "You have sucessfully logged out from your account")
+            } catch let logoffError as NSError {
+                print(logoffError)
+            }
         }
-        
+        logoutBox.addButton("No") {
+            logoutBox.dismiss(animated: true) {
+                print("Cancelled logout")
+            }
+        }
+        logoutBox.showWarning("Logout", subTitle: "Are you sure you want to logout?")
+
     }
 }
 
@@ -176,6 +186,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             dataManager.downloadAllMoviesJSON(page: currentPage, genres: selectedGenres)
             self.moviesCV.scrollToItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, at: .top,animated: true)
             titleBar.title = "\(genresArray[indexPath.row].name) Movies"
+            for genre in genresArray {
+                genre.bgColor = UIColor.systemGray
+            }
+            genresArray[indexPath.row].bgColor = UIColor.systemOrange
+            genreCV.reloadData()
+            genreCV.scrollToItem(at: indexPath, at: .left, animated: true)
         }
     }
     

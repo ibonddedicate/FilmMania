@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class MovieDetailController: UIViewController {
 
@@ -24,6 +26,7 @@ class MovieDetailController: UIViewController {
     var localMovieGlobalRating : Double?
     var localMovieReleasedDate : String?
     var fmColor = FMColor()
+    var ref: DatabaseReference!
     
     
     override func viewDidLoad() {
@@ -38,6 +41,13 @@ class MovieDetailController: UIViewController {
         setMovieData()
         setRatingColor()
     }
+    
+    @IBAction func markAsWatched(_ sender: Any) {
+        let userID = Auth.auth().currentUser?.uid
+        
+        
+    }
+    
     
     func setRatingColor() {
         if localMovieGlobalRating! >= 5.0 {

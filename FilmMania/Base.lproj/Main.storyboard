@@ -467,7 +467,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="S8S-f3-eSW">
-                                <rect key="frame" x="10" y="265" width="355" height="73"/>
+                                <rect key="frame" x="10" y="265" width="355" height="109"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUa-qP-qWp">
                                         <rect key="frame" x="0.0" y="0.0" width="98" height="24"/>
@@ -499,8 +499,19 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJ9-xy-Ncu">
+                                        <rect key="frame" x="0.0" y="79" width="355" height="30"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Mark as watched">
+                                            <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="markAsWatched:" destination="Sba-z1-xWV" eventType="touchUpInside" id="mgd-DP-xar"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="RJ9-xy-Ncu" firstAttribute="centerX" secondItem="S8S-f3-eSW" secondAttribute="centerX" id="00p-Uj-a3l"/>
                                     <constraint firstItem="TNm-to-dTj" firstAttribute="top" secondItem="LE0-GT-swk" secondAttribute="bottom" constant="6" id="3CZ-a6-ugE"/>
                                     <constraint firstItem="LE0-GT-swk" firstAttribute="top" secondItem="GUa-qP-qWp" secondAttribute="bottom" constant="6" id="6GG-8h-KJM"/>
                                     <constraint firstItem="LE0-GT-swk" firstAttribute="leading" secondItem="S8S-f3-eSW" secondAttribute="leading" id="JeZ-au-uzz"/>
