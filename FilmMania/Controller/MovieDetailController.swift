@@ -25,8 +25,10 @@ class MovieDetailController: UIViewController {
     var localMovieOverview : String?
     var localMovieGlobalRating : Double?
     var localMovieReleasedDate : String?
+    var localMovieID : Int?
     var fmColor = FMColor()
     var ref: DatabaseReference!
+    
     
     
     override func viewDidLoad() {
@@ -43,7 +45,14 @@ class MovieDetailController: UIViewController {
     }
     
     @IBAction func markAsWatched(_ sender: Any) {
+        ref = Database.database().reference()
         let userID = Auth.auth().currentUser?.uid
+        let db = Firestore.firestore()
+        print(userID!)
+        let watchedRef = db.collection("users").document(userID!)
+        watchedRef.updateData([
+            "watched": FieldValue.arrayUnion([localMovieID!])
+        ])
         
         
     }

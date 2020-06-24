@@ -39,27 +39,24 @@ class SignUpController: UIViewController {
         
         if validateForm() {
             Auth.auth().createUser(withEmail: properEmail, password: properPassword) { (result, error) in
-                
                 if error != nil {
-                    
                     SCLAlertView().showError("Error", subTitle: String(error!.localizedDescription))
-                    
                 } else {
                     let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: ["firstName" : properFirstname, "lastName" : properLastname, "email" : properEmail, "uid": result!.user.uid]) { (error) in
+                    print(Auth.auth().currentUser!.uid)
+                    db.collection("users").document(result!.user.uid).setData(["firstName" : properFirstname, "lastName" : properLastname, "email" : properEmail]) { (error) in
                         if error != nil {
-                            print(error!)
+                            print (error!)
                         }
                     }
-                    
-                    print ("successfully registered")
+                    print ("successfully registered UID \(result!.user.uid)")
                     let noCloseApperance = SCLAlertView.SCLAppearance(showCloseButton : false)
                     let successAlert = SCLAlertView(appearance: noCloseApperance)
                     successAlert.addButton("Got it!") {
                         self.moveToHome()
                         print("button Pressed")
                     }
-                    successAlert.showSuccess("Registration Successful", subTitle: "You are now a member of our Film Mania Community. You will be able to rate and comment on your favorite films.")
+                    successAlert.showSuccess("Registration Successful", subTitle: "Hi \(properFirstname), You are now a member of our Film Mania Community. You will be able to mark your favorite films.")
                 }
             }
         } else {
