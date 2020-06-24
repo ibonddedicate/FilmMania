@@ -122,6 +122,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             destination.localMovieOverview = movieDetail?.overview
             destination.localMovieGlobalRating = movieDetail?.voteAverage
             destination.localMovieReleasedDate = movieDetail?.releaseDate
+            destination.localMovieID = movieDetail?.id
         }
     }
 }
