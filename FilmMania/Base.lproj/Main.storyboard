@@ -466,8 +466,8 @@
                                     <constraint firstAttribute="height" constant="4" id="SHb-pX-QUf"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="S8S-f3-eSW">
-                                <rect key="frame" x="10" y="265" width="355" height="109"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="S8S-f3-eSW">
+                                <rect key="frame" x="10" y="265" width="355" height="147"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUa-qP-qWp">
                                         <rect key="frame" x="0.0" y="0.0" width="98" height="24"/>
@@ -476,7 +476,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LE0-GT-swk">
-                                        <rect key="frame" x="0.0" y="30" width="80" height="20"/>
+                                        <rect key="frame" x="0.0" y="33" width="80" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzO-Yc-Wcb">
                                                 <rect key="frame" x="6.6666666666666714" y="4" width="67" height="12"/>
@@ -494,15 +494,26 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNm-to-dTj">
-                                        <rect key="frame" x="0.0" y="56" width="114.66666666666667" height="17"/>
+                                        <rect key="frame" x="0.0" y="62" width="114.66666666666667" height="17"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJ9-xy-Ncu">
-                                        <rect key="frame" x="0.0" y="79" width="355" height="30"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qqh-4g-kDn">
+                                        <rect key="frame" x="0.0" y="88" width="240" height="10"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="biH-YE-Ffj"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="RJ9-xy-Ncu">
+                                        <rect key="frame" x="0.0" y="107" width="355" height="40"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Mark as watched">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="EmC-Qj-Ebw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <state key="normal" title="Mark as Watched">
                                             <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
@@ -512,8 +523,8 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="RJ9-xy-Ncu" firstAttribute="centerX" secondItem="S8S-f3-eSW" secondAttribute="centerX" id="00p-Uj-a3l"/>
-                                    <constraint firstItem="TNm-to-dTj" firstAttribute="top" secondItem="LE0-GT-swk" secondAttribute="bottom" constant="6" id="3CZ-a6-ugE"/>
-                                    <constraint firstItem="LE0-GT-swk" firstAttribute="top" secondItem="GUa-qP-qWp" secondAttribute="bottom" constant="6" id="6GG-8h-KJM"/>
+                                    <constraint firstItem="TNm-to-dTj" firstAttribute="top" secondItem="LE0-GT-swk" secondAttribute="bottom" constant="9" id="3CZ-a6-ugE"/>
+                                    <constraint firstItem="LE0-GT-swk" firstAttribute="top" secondItem="GUa-qP-qWp" secondAttribute="bottom" constant="9" id="6GG-8h-KJM"/>
                                     <constraint firstItem="LE0-GT-swk" firstAttribute="leading" secondItem="S8S-f3-eSW" secondAttribute="leading" id="JeZ-au-uzz"/>
                                     <constraint firstItem="GUa-qP-qWp" firstAttribute="leading" secondItem="S8S-f3-eSW" secondAttribute="leading" id="Lqn-Y4-kRa"/>
                                     <constraint firstItem="TNm-to-dTj" firstAttribute="leading" secondItem="S8S-f3-eSW" secondAttribute="leading" id="Qb7-OM-QZ2"/>
@@ -579,6 +590,7 @@
                         <outlet property="ratingBox" destination="490-S0-aC0" id="6Bq-3n-bI7"/>
                         <outlet property="ratingLine" destination="FcJ-dR-bxM" id="Aet-en-Xw7"/>
                         <outlet property="releaseDateBox" destination="LE0-GT-swk" id="PJc-BO-azi"/>
+                        <outlet property="watchedBox" destination="RJ9-xy-Ncu" id="7Nd-0p-kAA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpo-90-KZK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

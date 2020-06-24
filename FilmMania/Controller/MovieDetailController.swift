@@ -20,6 +20,7 @@ class MovieDetailController: UIViewController {
     @IBOutlet weak var releaseDateBox: UIView!
     @IBOutlet weak var ratingBox: UIView!
     @IBOutlet weak var ratingLine: UIView!
+    @IBOutlet weak var watchedBox: UIButton!
     var localMovieTitle: String?
     var localMoviePosterURL: String?
     var localMovieOverview : String?
@@ -28,6 +29,8 @@ class MovieDetailController: UIViewController {
     var localMovieID : Int?
     var fmColor = FMColor()
     var ref: DatabaseReference!
+    var watchedMovie = [Int]()
+    var watched = false
     
     
     
@@ -42,18 +45,51 @@ class MovieDetailController: UIViewController {
         movieTitle.text = localMovieTitle!
         setMovieData()
         setRatingColor()
+        checkForWatched()
+        watchedBox.layer.cornerRadius = 10
+    }
+    
+    func checkForWatched() {
+        watchedBox.backgroundColor = UIColor.systemOrange
+        ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        let db = Firestore.firestore()
+        let watchedRef = db.collection("users").document(userID!)
+        watchedRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let watched = document.get("watched")
+                self.watchedMovie = watched as! [Int]
+                for i in self.watchedMovie {
+                    if i == self.localMovieID! {
+                        self.watchedBox.setTitle("You have watched this movie", for: .normal)
+                        self.watchedBox.backgroundColor = UIColor.systemGray
+                        self.watched = true
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     @IBAction func markAsWatched(_ sender: Any) {
         ref = Database.database().reference()
         let userID = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
-        print(userID!)
         let watchedRef = db.collection("users").document(userID!)
-        watchedRef.updateData([
-            "watched": FieldValue.arrayUnion([localMovieID!])
-        ])
-        
+        if watched == true {
+            watchedRef.updateData(["watched": FieldValue.arrayRemove([localMovieID!])]) { (error) in
+                self.watched = false
+                self.watchedBox.setTitle("Mark as Watched", for: .normal)
+                self.checkForWatched()
+                print("removed movie ID \(self.localMovieID!) from \(userID!)")
+            }
+        } else {
+            watchedRef.updateData(["watched": FieldValue.arrayUnion([localMovieID!])])
+            print("added movie ID \(localMovieID!) to \(userID!)")
+            watched = true
+            checkForWatched()
+        }
         
     }
     
