@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import FirebaseDatabase
 
 class MovieDetailController: UIViewController {
 
@@ -67,7 +66,7 @@ class MovieDetailController: UIViewController {
                     }
                 }
             } else {
-                print("Document does not exist")
+                print("Document does not exist \(error!)")
             }
         }
     }
@@ -129,4 +128,5 @@ class MovieDetailController: UIViewController {
             movieReleasedDate.text = localMovieReleasedDate!
         }
     }
+    
 }

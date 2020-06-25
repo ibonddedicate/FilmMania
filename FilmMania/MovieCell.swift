@@ -11,5 +11,6 @@ import UIKit
 class MovieCell: UICollectionViewCell {
     
     @IBOutlet weak var moviePoster: UIImageView!
+    @IBOutlet weak var watchedBanner: UILabel!
     
 }

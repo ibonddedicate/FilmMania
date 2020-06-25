@@ -19,11 +19,15 @@ class HomeViewController: UIViewController {
     var movieDetail:MovieDetails?
     var genresArray = [Genres]()
     var selectedGenres = ""
+    var ref: DatabaseReference!
+    var watchedMovie = [Int]()
+    var selectedMovieDetail:IndexPath?
     
     @IBOutlet weak var genreBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var moviesCV: UICollectionView!
     @IBOutlet weak var genreCV: UICollectionView!
     @IBOutlet weak var titleBar: UINavigationItem!
+
     
     let listRefresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -44,6 +48,9 @@ class HomeViewController: UIViewController {
         moviesCV.refreshControl = listRefresh
         genreCV.delegate = self
         genreCV.dataSource = self
+        getUserWatchedList {
+            self.moviesCV.reloadData()
+        }
     }
         
     @objc func refresh(sender: UIRefreshControl){
@@ -70,6 +77,30 @@ class HomeViewController: UIViewController {
         let thriller = Genres(id: "53", name: "Thriller", bgColor: UIColor.systemGray)
         genresArray.append(thriller)
         
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        getUserWatchedList {
+            if self.selectedMovieDetail != nil {
+                self.moviesCV.reloadItems(at: [self.selectedMovieDetail!])
+                print("Loaded updated user watched list")
+            }
+        }
+    }
+    
+    func getUserWatchedList(completion: @escaping (()->Void)) {
+        ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        let db = Firestore.firestore()
+        let watchedRef = db.collection("users").document(userID!)
+        watchedRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let watched = document.get("watched")
+                self.watchedMovie = watched as! [Int]
+                completion()
+            } else {
+                print("Document does not exist \(error!)")
+            }
+        }
     }
     
     @IBAction func logoffButton(_ sender: Any) {
@@ -140,6 +171,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
             let imageUrl = moviesArray[indexPath.row].posterPath!
             let url = URL(string: "https://image.tmdb.org/t/p/w500\(imageUrl)")!
+            cellA.watchedBanner.isHidden = true
+            for i in watchedMovie {
+                if i == moviesArray[indexPath.row].id {
+                    cellA.watchedBanner.isHidden = false
+                }
+            }
             cellA.moviePoster.load(url: url)
             cellA.layer.cornerRadius = 10
             return cellA
@@ -175,6 +212,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.moviesCV {
+            selectedMovieDetail = indexPath
             dataManager.downloadMovieDetailJSON(id: moviesArray[indexPath.row].id) {
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "ToMovieDetail", sender: self)
