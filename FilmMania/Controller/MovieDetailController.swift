@@ -89,7 +89,7 @@ class MovieDetailController: UIViewController {
             watched = true
             checkForWatched()
         }
-        
+        watchedBox.onePulse()
     }
     
     
