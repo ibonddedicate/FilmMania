@@ -378,7 +378,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="170" height="254"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watched" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ff-NQ-FVE">
-                                                                    <rect key="frame" x="0.0" y="112" width="170" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="170" height="30"/>
                                                                     <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="tdX-U3-beJ"/>
@@ -390,10 +390,10 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="UVk-ea-w7d" secondAttribute="trailing" id="68W-vw-AUf"/>
+                                                                <constraint firstItem="4ff-NQ-FVE" firstAttribute="top" secondItem="gBr-aq-JeF" secondAttribute="top" id="9NJ-3V-Me4"/>
                                                                 <constraint firstItem="UVk-ea-w7d" firstAttribute="top" secondItem="gBr-aq-JeF" secondAttribute="top" id="DSO-w2-ZMx"/>
                                                                 <constraint firstItem="4ff-NQ-FVE" firstAttribute="leading" secondItem="gBr-aq-JeF" secondAttribute="leading" id="Edp-2h-Nhl"/>
                                                                 <constraint firstAttribute="right" secondItem="4ff-NQ-FVE" secondAttribute="right" id="FE4-gF-Vva"/>
-                                                                <constraint firstItem="4ff-NQ-FVE" firstAttribute="centerY" secondItem="gBr-aq-JeF" secondAttribute="centerY" id="Rok-t6-CoC"/>
                                                                 <constraint firstItem="UVk-ea-w7d" firstAttribute="leading" secondItem="gBr-aq-JeF" secondAttribute="leading" id="VyE-gj-dbx"/>
                                                                 <constraint firstItem="4ff-NQ-FVE" firstAttribute="centerX" secondItem="gBr-aq-JeF" secondAttribute="centerX" id="W7A-0b-LXf"/>
                                                                 <constraint firstAttribute="bottom" secondItem="UVk-ea-w7d" secondAttribute="bottom" id="sYX-eX-BSa"/>
