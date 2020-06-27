@@ -42,7 +42,7 @@ class SearchViewController: UIViewController, SearchedMovieDelegate  {
         txt.backgroundColor = UIColor.white
         txt.textColor = UIColor.black
         searchBox.addButton("Search", backgroundColor: UIColor.systemOrange) {
-            print("Button Pressed : \(txt.text!)")
+            print("Search for : \(txt.text!)")
             if txt.text! != "" {
                 self.navBar.title = "\(txt.text!)"
             }
@@ -60,7 +60,10 @@ class SearchViewController: UIViewController, SearchedMovieDelegate  {
     }
     
     func didGetSearchedMovie(dataManager: DataManager, movie: MovieData) {
-        searchedMovieArray = movie.results
+        searchedMovieArray = movie.results.filter({ (movie) -> Bool in
+            movie.backdropPath != nil
+        })
+        print("\(searchedMovieArray.count) Proper search results were chosen from total results")
     }
     
     func didFail(error: Error) {

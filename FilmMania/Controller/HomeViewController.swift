@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
     let listRefresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
-        refreshControl.tintColor = UIColor.white
+        refreshControl.tintColor = UIColor.systemGray
         return refreshControl
     }()
     

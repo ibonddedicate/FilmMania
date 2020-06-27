@@ -81,11 +81,11 @@ class MovieDetailController: UIViewController {
                 self.watched = false
                 self.watchedBox.setTitle("Mark as Watched", for: .normal)
                 self.checkForWatched()
-                print("removed movie ID \(self.localMovieID!) from \(userID!)")
+                print("Removed movie ID \(self.localMovieID!) from user ID : \(userID!)")
             }
         } else {
             watchedRef.updateData(["watched": FieldValue.arrayUnion([localMovieID!])])
-            print("added movie ID \(localMovieID!) to \(userID!)")
+            print("Added movie ID \(localMovieID!) to user ID : \(userID!)")
             watched = true
             checkForWatched()
         }

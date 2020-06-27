@@ -95,7 +95,7 @@ class DataManager {
                     let decoder = JSONDecoder()
                     let decodedMovie = try decoder.decode(MovieData.self, from: data!)
                     self.searchedMovieDelegate?.didGetSearchedMovie(dataManager: self, movie: decodedMovie)
-                    print("Got \(decodedMovie.results.count) search results")
+                    print("Got \(decodedMovie.results.count) total search results")
                     completion()
                 } catch {
                     self.searchedMovieDelegate?.didFail(error: error)
