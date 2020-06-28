@@ -20,6 +20,7 @@ class MovieDetailController: UIViewController {
     @IBOutlet weak var ratingBox: UIView!
     @IBOutlet weak var ratingLine: UIView!
     @IBOutlet weak var watchedBox: UIButton!
+    @IBOutlet weak var memberViews: UILabel!
     var localMovieTitle: String?
     var localMoviePosterURL: String?
     var localMovieOverview : String?
@@ -46,6 +47,7 @@ class MovieDetailController: UIViewController {
         setRatingColor()
         checkForWatched()
         watchedBox.layer.cornerRadius = 10
+        getCurrentView(movieID: localMovieID!)
     }
     
     func checkForWatched() {
@@ -71,25 +73,65 @@ class MovieDetailController: UIViewController {
         }
     }
     
-    @IBAction func markAsWatched(_ sender: Any) {
+    @IBAction func markAsWatched(_ sender: UIButton) {
         ref = Database.database().reference()
         let userID = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
         let watchedRef = db.collection("users").document(userID!)
+        //let viewsRef = db.collection("films").document(String(localMovieID!))
         if watched == true {
             watchedRef.updateData(["watched": FieldValue.arrayRemove([localMovieID!])]) { (error) in
                 self.watched = false
                 self.watchedBox.setTitle("Mark as Watched", for: .normal)
                 self.checkForWatched()
+                self.removeViews(movieID: self.localMovieID!)
                 print("Removed movie ID \(self.localMovieID!) from user ID : \(userID!)")
             }
         } else {
+            self.addViews(movieID: self.localMovieID!)
             watchedRef.updateData(["watched": FieldValue.arrayUnion([localMovieID!])])
             print("Added movie ID \(localMovieID!) to user ID : \(userID!)")
             watched = true
             checkForWatched()
         }
-        watchedBox.onePulse()
+        sender.onePulse()
+    }
+    
+    func addViews(movieID: Int) {
+        let viewRef = self.ref.child("films").child(String(movieID)).child("views")
+        viewRef.observeSingleEvent(of: .value) { (snapshot) in
+            var currentView = snapshot.value as? Int ?? 0
+            currentView += 1
+            viewRef.setValue(currentView)
+            self.updateViewlabel(view: currentView)
+        }
+    }
+    func removeViews(movieID: Int) {
+        let viewRef = self.ref.child("films").child(String(movieID)).child("views")
+        viewRef.observeSingleEvent(of: .value) { (snapshot) in
+            var currentView = snapshot.value as? Int ?? 0
+            currentView -= 1
+            viewRef.setValue(currentView)
+            self.updateViewlabel(view: currentView)
+        }
+    }
+    
+    func updateViewlabel(view: Int) {
+        if view > 1 {
+            self.memberViews.text = "\(view) members have watched this film"
+        } else if view == 1 {
+            self.memberViews.text = "Only 1 member have watched this film"
+        } else {
+            self.memberViews.text = "None of the members have watched this film"
+        }
+    }
+    
+    func getCurrentView(movieID: Int) {
+        let viewRef = self.ref.child("films").child(String(movieID)).child("views")
+        viewRef.observeSingleEvent(of: .value) { (snapshot) in
+            let currentView = snapshot.value as? Int ?? 0
+            self.updateViewlabel(view: currentView)
+        }
     }
     
     

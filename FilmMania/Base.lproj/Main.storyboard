@@ -320,10 +320,10 @@
                                         <rect key="frame" x="10" y="3" width="355" height="721"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oqD-64-baQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="35"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="35" id="F4w-Y2-LEA"/>
+                                                    <constraint firstAttribute="height" constant="45" id="F4w-Y2-LEA"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fPT-LZ-6XT">
                                                     <size key="itemSize" width="90" height="30"/>
@@ -333,15 +333,15 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GenreCell" id="5ub-OA-FTL" customClass="GenreCell" customModule="FilmMania" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="2.3333333333333335" width="90" height="30.000000000000004"/>
+                                                        <rect key="frame" x="0.0" y="7.333333333333333" width="90" height="30.000000000000004"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="veQ-hP-h9K">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="30.000000000000004"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvb-MK-Ow5">
-                                                                    <rect key="frame" x="20.333333333333332" y="6.6666666666666679" width="49.333333333333343" height="17"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                                    <rect key="frame" x="21.333333333333332" y="6.6666666666666679" width="47.333333333333343" height="17"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -358,7 +358,7 @@
                                                 </cells>
                                             </collectionView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wKH-9B-5Pu">
-                                                <rect key="frame" x="0.0" y="40" width="355" height="681"/>
+                                                <rect key="frame" x="0.0" y="50" width="355" height="671"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4t5-gY-BSM">
                                                     <size key="itemSize" width="170" height="254"/>
@@ -377,13 +377,13 @@
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UVk-ea-w7d">
                                                                     <rect key="frame" x="0.0" y="0.0" width="170" height="254"/>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watched" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ff-NQ-FVE">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="170" height="30"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WATCHED" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ff-NQ-FVE">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="170" height="20"/>
                                                                     <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="30" id="tdX-U3-beJ"/>
+                                                                        <constraint firstAttribute="height" constant="20" id="tdX-U3-beJ"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -482,7 +482,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="S8S-f3-eSW">
-                                <rect key="frame" x="10" y="265" width="355" height="147"/>
+                                <rect key="frame" x="10" y="265" width="355" height="170.33333333333337"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUa-qP-qWp">
                                         <rect key="frame" x="0.0" y="0.0" width="98" height="24"/>
@@ -535,14 +535,22 @@
                                             <action selector="markAsWatched:" destination="Sba-z1-xWV" eventType="touchUpInside" id="mgd-DP-xar"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Members that have watched this films" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k64-J7-Zj7">
+                                        <rect key="frame" x="0.0" y="156" width="355" height="14.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="RJ9-xy-Ncu" firstAttribute="centerX" secondItem="S8S-f3-eSW" secondAttribute="centerX" id="00p-Uj-a3l"/>
                                     <constraint firstItem="TNm-to-dTj" firstAttribute="top" secondItem="LE0-GT-swk" secondAttribute="bottom" constant="9" id="3CZ-a6-ugE"/>
                                     <constraint firstItem="LE0-GT-swk" firstAttribute="top" secondItem="GUa-qP-qWp" secondAttribute="bottom" constant="9" id="6GG-8h-KJM"/>
+                                    <constraint firstItem="k64-J7-Zj7" firstAttribute="leading" secondItem="S8S-f3-eSW" secondAttribute="leading" id="JHh-es-9sj"/>
                                     <constraint firstItem="LE0-GT-swk" firstAttribute="leading" secondItem="S8S-f3-eSW" secondAttribute="leading" id="JeZ-au-uzz"/>
                                     <constraint firstItem="GUa-qP-qWp" firstAttribute="leading" secondItem="S8S-f3-eSW" secondAttribute="leading" id="Lqn-Y4-kRa"/>
                                     <constraint firstItem="TNm-to-dTj" firstAttribute="leading" secondItem="S8S-f3-eSW" secondAttribute="leading" id="Qb7-OM-QZ2"/>
+                                    <constraint firstAttribute="trailing" secondItem="k64-J7-Zj7" secondAttribute="trailing" id="qQz-DD-HbQ"/>
                                     <constraint firstItem="GUa-qP-qWp" firstAttribute="top" secondItem="S8S-f3-eSW" secondAttribute="top" id="s9V-aG-c1x"/>
                                 </constraints>
                             </stackView>
@@ -597,6 +605,7 @@
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="Ttd-JW-6Yl"/>
                     <connections>
+                        <outlet property="memberViews" destination="k64-J7-Zj7" id="4DS-lJ-ULc"/>
                         <outlet property="movieGlobalRating" destination="z7h-x1-b6f" id="Gdd-Va-hNx"/>
                         <outlet property="movieOverview" destination="TNm-to-dTj" id="Scs-Aw-m2N"/>
                         <outlet property="moviePoster" destination="qnZ-bj-Fzo" id="coy-P3-llS"/>

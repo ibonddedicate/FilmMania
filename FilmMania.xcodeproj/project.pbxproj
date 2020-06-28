@@ -121,14 +121,12 @@
 			isa = PBXGroup;
 			children = (
 				753EF266249BA46D005C53C7 /* GoogleService-Info.plist */,
-				75530954249B664100E3F452 /* Utilities.swift */,
 				7553093E249B544300E3F452 /* AppDelegate.swift */,
 				75530940249B544300E3F452 /* SceneDelegate.swift */,
 				7523F610249BF0060085C356 /* MovieCell.swift */,
 				757735F924A1BA7000926831 /* GenreCell.swift */,
 				756105AD24A0D03100EF9959 /* SearchedMovieCell.swift */,
-				7523F612249BF08F0085C356 /* MovieData.swift */,
-				7523F614249BF27F0085C356 /* DataManager.swift */,
+				75E52DC524A83B220002965E /* Model */,
 				7523F60D249BA8AA0085C356 /* Controller */,
 				75530944249B544300E3F452 /* Main.storyboard */,
 				75530947249B544600E3F452 /* Assets.xcassets */,
@@ -136,6 +134,16 @@
 				7553094C249B544600E3F452 /* Info.plist */,
 			);
 			path = FilmMania;
+			sourceTree = "<group>";
+		};
+		75E52DC524A83B220002965E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				75530954249B664100E3F452 /* Utilities.swift */,
+				7523F612249BF08F0085C356 /* MovieData.swift */,
+				7523F614249BF27F0085C356 /* DataManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
