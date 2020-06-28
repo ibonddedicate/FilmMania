@@ -320,10 +320,10 @@
                                         <rect key="frame" x="10" y="3" width="355" height="721"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oqD-64-baQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="F4w-Y2-LEA"/>
+                                                    <constraint firstAttribute="height" constant="50" id="F4w-Y2-LEA"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fPT-LZ-6XT">
                                                     <size key="itemSize" width="90" height="30"/>
@@ -333,10 +333,10 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GenreCell" id="5ub-OA-FTL" customClass="GenreCell" customModule="FilmMania" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="7.333333333333333" width="90" height="30.000000000000004"/>
+                                                        <rect key="frame" x="0.0" y="10" width="90" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="veQ-hP-h9K">
-                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="30.000000000000004"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvb-MK-Ow5">
@@ -358,7 +358,7 @@
                                                 </cells>
                                             </collectionView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wKH-9B-5Pu">
-                                                <rect key="frame" x="0.0" y="50" width="355" height="671"/>
+                                                <rect key="frame" x="0.0" y="55" width="355" height="666"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4t5-gY-BSM">
                                                     <size key="itemSize" width="170" height="254"/>

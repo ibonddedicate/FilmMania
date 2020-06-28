@@ -257,7 +257,7 @@ extension HomeViewController : UIScrollViewDelegate {
     }else {
         // expand the header
         view.layoutIfNeeded()
-        genreBarHeightConstraint.constant = 35
+        genreBarHeightConstraint.constant = 50
         UIView.animate(withDuration: 0.35, delay: 0, options: [.allowUserInteraction], animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
