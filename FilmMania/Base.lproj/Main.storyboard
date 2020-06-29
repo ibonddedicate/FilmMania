@@ -668,11 +668,25 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WATCHED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSh-DO-d6b">
+                                                            <rect key="frame" x="290" y="24" width="85" height="25"/>
+                                                            <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="VlH-We-Pgf"/>
+                                                                <constraint firstAttribute="height" constant="25" id="eZX-Ut-35a"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="qe9-HH-9Yl" secondAttribute="bottom" id="0Gj-qv-FGN"/>
                                                         <constraint firstItem="rHK-fe-UCm" firstAttribute="top" secondItem="of5-VK-DNO" secondAttribute="top" id="JQb-KT-mMK"/>
                                                         <constraint firstItem="rHK-fe-UCm" firstAttribute="leading" secondItem="of5-VK-DNO" secondAttribute="leading" id="KWB-Fh-0NV"/>
+                                                        <constraint firstItem="zSh-DO-d6b" firstAttribute="top" secondItem="of5-VK-DNO" secondAttribute="top" constant="24" id="OX7-LW-bjV"/>
+                                                        <constraint firstAttribute="trailing" secondItem="zSh-DO-d6b" secondAttribute="trailing" id="SFC-fE-zsB"/>
+                                                        <constraint firstItem="zSh-DO-d6b" firstAttribute="left" secondItem="of5-VK-DNO" secondAttribute="left" constant="290" id="Xos-sC-W17"/>
                                                         <constraint firstAttribute="trailing" secondItem="rHK-fe-UCm" secondAttribute="trailing" id="Zoh-Um-Zuq"/>
                                                         <constraint firstAttribute="trailing" secondItem="qe9-HH-9Yl" secondAttribute="trailing" id="evV-bD-dL2"/>
                                                         <constraint firstAttribute="bottom" secondItem="rHK-fe-UCm" secondAttribute="bottom" id="gp0-wk-cxW"/>
@@ -683,6 +697,7 @@
                                                 <connections>
                                                     <outlet property="movieImage" destination="rHK-fe-UCm" id="2eN-zy-Pfb"/>
                                                     <outlet property="movieName" destination="qe9-HH-9Yl" id="gwr-A2-1Ko"/>
+                                                    <outlet property="watchedBanner" destination="zSh-DO-d6b" id="GNv-yX-txf"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>

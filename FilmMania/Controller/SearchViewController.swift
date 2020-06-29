@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import SCLAlertView
 
 class SearchViewController: UIViewController, SearchedMovieDelegate  {
@@ -14,10 +15,14 @@ class SearchViewController: UIViewController, SearchedMovieDelegate  {
     var searchedMovieArray = [Movie]()
     var dataManager = DataManager()
     var movieDetail:MovieDetails?
+    var ref: DatabaseReference!
+    var watchedMovie = [Int]()
+    var selectedMovieDetail:IndexPath?
+    
     @IBOutlet weak var noResultPic: UIImageView!
     @IBOutlet weak var searchedMovieCV: UICollectionView!
     @IBOutlet weak var navBar: UINavigationItem!
-    
+
     var movieSearched:String?
     
     override func viewDidLoad() {
@@ -28,6 +33,14 @@ class SearchViewController: UIViewController, SearchedMovieDelegate  {
         searchedMovieCV.delegate = self
         searchedMovieCV.dataSource = self
         bringUpSearchBox()
+        getUserWatchedList {}
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        getUserWatchedList {
+            if self.selectedMovieDetail != nil {
+                self.searchedMovieCV.reloadItems(at: [self.selectedMovieDetail!])
+            }
+        }
     }
 
     @IBAction func searchButton(_ sender: Any) {
@@ -70,6 +83,22 @@ class SearchViewController: UIViewController, SearchedMovieDelegate  {
         print(error)
     }
     
+    func getUserWatchedList(completion: @escaping (()->Void)) {
+        ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        let db = Firestore.firestore()
+        let watchedRef = db.collection("users").document(userID!)
+        watchedRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let watched = document.get("watched")
+                self.watchedMovie = watched as! [Int]
+                completion()
+            } else {
+                print("Document does not exist \(error!)")
+            }
+        }
+    }
+    
 }
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -87,13 +116,15 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchedMovie", for: indexPath) as! SearchedMovieCell
-        if searchedMovieArray[indexPath.row].backdropPath != nil {
-            let imageUrl = searchedMovieArray[indexPath.row].backdropPath!
-            let url = URL(string: "https://image.tmdb.org/t/p/original\(imageUrl)")!
-            cell.movieImage.load(url: url)
-        } else {
-            cell.movieImage.image = UIImage(named: "noposter.jpg")
+        cell.watchedBanner.isHidden = true
+        for i in watchedMovie {
+            if i == searchedMovieArray[indexPath.row].id {
+                cell.watchedBanner.isHidden = false
+            }
         }
+        let imageUrl = searchedMovieArray[indexPath.row].backdropPath!
+        let url = URL(string: "https://image.tmdb.org/t/p/original\(imageUrl)")!
+        cell.movieImage.load(url: url)
         cell.movieName.text = searchedMovieArray[indexPath.row].title!
         cell.layer.cornerRadius = 10
         
@@ -101,6 +132,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedMovieDetail = indexPath
         dataManager.downloadMovieDetailJSON(id: searchedMovieArray[indexPath.row].id) {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "ToMovieDetail", sender: self)
