@@ -42,13 +42,13 @@ class HomeViewController: UIViewController {
         makeGenreList()
         dataManager.allMoviesDelegate = self
         dataManager.movieDetailsDelegate = self
-        dataManager.downloadAllMoviesJSON(page: currentPage, genres: selectedGenres)
         moviesCV.delegate = self
         moviesCV.dataSource = self
         moviesCV.refreshControl = listRefresh
         genreCV.delegate = self
         genreCV.dataSource = self
         getUserWatchedList {
+            self.dataManager.downloadAllMoviesJSON(page: self.currentPage, genres: self.selectedGenres)
             self.moviesCV.reloadData()
         }
     }
