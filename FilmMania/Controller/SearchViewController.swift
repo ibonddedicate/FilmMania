@@ -88,10 +88,10 @@ class SearchViewController: UIViewController, SearchedMovieDelegate  {
         let userID = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
         let watchedRef = db.collection("users").document(userID!)
-        watchedRef.getDocument { (document, error) in
+        watchedRef.getDocument {[weak self] (document, error) in
             if let document = document, document.exists {
                 let watched = document.get("watched")
-                self.watchedMovie = watched as! [Int]
+                self?.watchedMovie = watched as! [Int]
                 completion()
             } else {
                 print("Document does not exist \(error!)")

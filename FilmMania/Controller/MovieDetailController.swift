@@ -80,12 +80,12 @@ class MovieDetailController: UIViewController {
         let watchedRef = db.collection("users").document(userID!)
         //let viewsRef = db.collection("films").document(String(localMovieID!))
         if watched == true {
-            watchedRef.updateData(["watched": FieldValue.arrayRemove([localMovieID!])]) { (error) in
-                self.watched = false
-                self.watchedBox.setTitle("Mark as Watched", for: .normal)
-                self.checkForWatched()
-                self.removeViews(movieID: self.localMovieID!)
-                print("Removed movie ID \(self.localMovieID!) from user ID : \(userID!)")
+            watchedRef.updateData(["watched": FieldValue.arrayRemove([localMovieID!])]) {[weak self] (error) in
+                self?.watched = false
+                self?.watchedBox.setTitle("Mark as Watched", for: .normal)
+                self?.checkForWatched()
+                self?.removeViews(movieID: (self?.localMovieID!)!)
+                print("Removed movie ID \(self!.localMovieID!) from user ID : \(userID!)")
             }
         } else {
             self.addViews(movieID: self.localMovieID!)
@@ -99,20 +99,20 @@ class MovieDetailController: UIViewController {
     
     func addViews(movieID: Int) {
         let viewRef = self.ref.child("films").child(String(movieID)).child("views")
-        viewRef.observeSingleEvent(of: .value) { (snapshot) in
+        viewRef.observeSingleEvent(of: .value) {[weak self] (snapshot) in
             var currentView = snapshot.value as? Int ?? 0
             currentView += 1
             viewRef.setValue(currentView)
-            self.updateViewlabel(view: currentView)
+            self?.updateViewlabel(view: currentView)
         }
     }
     func removeViews(movieID: Int) {
         let viewRef = self.ref.child("films").child(String(movieID)).child("views")
-        viewRef.observeSingleEvent(of: .value) { (snapshot) in
+        viewRef.observeSingleEvent(of: .value) {[weak self] (snapshot) in
             var currentView = snapshot.value as? Int ?? 0
             currentView -= 1
             viewRef.setValue(currentView)
-            self.updateViewlabel(view: currentView)
+            self?.updateViewlabel(view: currentView)
         }
     }
     

@@ -38,7 +38,7 @@ class SignUpController: UIViewController {
         let properPassword = passwordBox.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if validateForm() {
-            Auth.auth().createUser(withEmail: properEmail, password: properPassword) { (result, error) in
+            Auth.auth().createUser(withEmail: properEmail, password: properPassword) { [weak self] (result, error) in
                 if error != nil {
                     SCLAlertView().showError("Error", subTitle: String(error!.localizedDescription))
                 } else {
@@ -53,7 +53,7 @@ class SignUpController: UIViewController {
                     let noCloseApperance = SCLAlertView.SCLAppearance(showCloseButton : false)
                     let successAlert = SCLAlertView(appearance: noCloseApperance)
                     successAlert.addButton("Got it!") {
-                        self.moveToHome()
+                        self?.moveToHome()
                         print("button Pressed")
                     }
                     successAlert.showSuccess("Registration Successful", subTitle: "Hi \(properFirstname), You are now a member of our Film Mania Community. You will be able to mark your favorite films.")
